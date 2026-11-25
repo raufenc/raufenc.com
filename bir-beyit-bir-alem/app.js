@@ -93,7 +93,7 @@
     $("room-meter").textContent = /Hece/i.test(p.meter || "") ? "Hece ölçüsü · 5 + 5" : (p.meter_name || "");
     $("room-aruz").href = `${ARUZ}?beyit=${n}&kaynak=bir-beyit-bir-alem`;
     $("room-aruz").textContent = /Hece/i.test(p.meter || "") ? "Hece ölçüsünü Fâilâtün’de keşfedin ↗" : "Bu beytin ritmini Fâilâtün’de dinleyin ↗";
-    $("room-page").textContent = `Kitapta ${2 * n}–${2 * n + 1}. sayfalar`;
+    $("room-page").textContent = "";
     renderListen(p, opts.autoplay);
     const prev = n > 1 ? n - 1 : 52, next = n < 52 ? n + 1 : 1;
     $("prev-no").textContent = prev; $("next-no").textContent = next;
@@ -185,7 +185,7 @@
     $("room-share").addEventListener("click", async () => {
       const url = `${location.origin}${location.pathname}#beyit-${current}`;
       const p = byNo(current);
-      try { if (navigator.share) { await navigator.share({ title: `Bir Beyit, Bir Âlem · ${current}. beyit`, text: p.lines.join(" / "), url }); return; } } catch (_) { return; }
+      try { if (navigator.share) { await navigator.share({ title: `Şair Ne Demek İstedi? · ${current}. beyit`, text: p.lines.join(" / "), url }); return; } } catch (_) { return; }
       try { await navigator.clipboard.writeText(url); toast("Bağlantı kopyalandı"); } catch (_) { toast(url); }
     });
     ["hero-play", "listen-play"].forEach((id) => $(id).addEventListener("click", startSequence));
@@ -204,9 +204,7 @@
     $("jump").addEventListener("submit", (e) => {
       e.preventDefault();
       const v = parseInt($("jump-no").value, 10);
-      const kind = (new FormData(e.currentTarget)).get("kind");
-      let n = kind === "sayfa" ? Math.floor(v / 2) : v;
-      if (kind === "sayfa" && (v < 2 || v > 105)) { toast("Beyitler 2. ile 105. sayfalar arasında"); return; }
+      const n = v;
       if (!(n >= 1 && n <= 52)) { toast("1 ile 52 arasında bir sayı yazın"); return; }
       seq = false; openRoom(n);
     });

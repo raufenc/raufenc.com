@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Bir Beyit, Bir Âlem · Hayâtî İnanç</title>
-<meta name="description" content="Hayâtî İnanç Hocamızın “Bir Beyit, Bir Âlem” kitabı: elli iki beyit, elli iki tablo. Beyitleri Hocamızın sesinden dinleyin, tablolarını seyredin, vezinlerini keşfedin.">
+<title>Şair Ne Demek İstedi? · Hayati İnanç</title>
+<meta name="description" content="Hayati İnanç’ın “Şair Ne Demek İstedi? · Resimlerle 52 Beyit” kitabı: elli iki beyit, elli iki tablo. Beyitleri Hocamızın sesinden dinleyin, tablolarını seyredin, vezinlerini keşfedin.">
 <meta name="theme-color" content="#f5efe3">
 <link rel="canonical" href="https://raufenc.com/bir-beyit-bir-alem/">
 <meta property="og:type" content="book">
-<meta property="og:title" content="Bir Beyit, Bir Âlem · Hayâtî İnanç">
+<meta property="og:title" content="Şair Ne Demek İstedi? · Hayati İnanç">
 <meta property="og:description" content="Elli iki beyit, elli iki tablo; her biri Hocamızın sesiyle.">
 <meta property="og:image" content="https://raufenc.com/bir-beyit-bir-alem/tablo/01-k.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="tablo/01.webp">
-<link rel="stylesheet" href="style.css?v=20261117">
-<script src="app.js?v=20261117" defer></script>
+<link rel="stylesheet" href="style.css?v=20261125">
+<script src="app.js?v=20261125" defer></script>
 </head>
 <body>
 <a class="skip" href="#beyitler">Beyitlere geç</a>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#ust" aria-label="Bir Beyit, Bir Âlem — başa dön">Bir Beyit, <em>Bir Âlem</em></a>
+  <a class="brand" href="#ust" aria-label="Şair Ne Demek İstedi? — başa dön">Şair Ne Demek <em>İstedi?</em></a>
   <nav aria-label="Bölümler">
     <a href="#beyitler">Beyitler</a>
     <a href="#dinle">Dinle</a>
@@ -37,9 +37,9 @@
     <div class="hero-art" aria-hidden="true"><img src="tablo/01.webp" alt="" fetchpriority="high"></div>
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-inner">
-      <p class="author">HAYÂTÎ İNANÇ</p>
-      <h1 id="hero-title">Bir Beyit,<br><em>Bir Âlem</em></h1>
-      <p class="hero-lead">Elli iki beyit, elli iki tablo;<br>her biri Hocamızın sesiyle.</p>
+      <p class="author">HAYATİ İNANÇ</p>
+      <h1 id="hero-title">Şair Ne Demek<br><em>İstedi?</em></h1>
+      <p class="hero-lead">Resimlerle elli iki beyit;<br>tablosu, izahı ve Hocamızın sesiyle.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="#beyitler">Beyitlere gir</a>
         <button class="btn btn-ghost" type="button" id="hero-play"><span class="play-dot" aria-hidden="true"></span>Sırayla dinle</button>
@@ -59,16 +59,12 @@
       <p>Elinizdeki kitabın her beyti burada da sizi bekliyor: tablosu, vezni ve Hocamızın okuyuşu. Okuduğunuz beytin numarasını yazın, doğrudan açılsın.</p>
     </div>
     <form class="jump" id="jump" autocomplete="off">
-      <fieldset class="jump-kind"><legend class="sr-only">Ne yazacaksınız?</legend>
-        <label><input type="radio" name="kind" value="beyit" checked><span>Beyit sırası</span></label>
-        <label><input type="radio" name="kind" value="sayfa"><span>Sayfa no</span></label>
-      </fieldset>
-      <label for="jump-no" class="sr-only">Numara</label>
+      <label for="jump-no" class="jump-label">Beyit numarası</label>
       <div class="jump-row">
         <input id="jump-no" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="1–52" aria-describedby="jump-help">
         <button type="submit" class="btn btn-solid">Aç</button>
       </div>
-      <p id="jump-help" class="jump-help">Beyitler kitapta sırayla dizilidir: 1. beyit 2–3. sayfalarda, 52. beyit 104–105. sayfalarda. Sayfa numarasıyla da arayabilirsiniz.</p>
+      <p id="jump-help" class="jump-help">Numara, kitapta her beytin ilk mısraının solunda kiremit renkle yazılıdır; kitabın sonundaki fihristte de bulunur.</p>
     </form>
   </section>
 
@@ -96,7 +92,7 @@
     <div class="listen-text">
       <p class="eyebrow light">Hocamızın sesinden</p>
       <h2 id="listen-title">Beyit beyit, <em>sırayla dinleyin</em></h2>
-      <p>Hayâtî İnanç Hocamızın sohbetlerinden ve programlarından, her beytin okunduğu ya da izah edildiği an seçildi. Bir düğmeyle başlayın; biri bitince öteki açılsın.</p>
+      <p>Hayati İnanç Hocamızın sohbetlerinden ve programlarından, her beytin okunduğu ya da izah edildiği an seçildi. Bir düğmeyle başlayın; biri bitince öteki açılsın.</p>
       <div class="listen-stats"><span><b id="stat-rec">—</b> okuyuş</span><span><b>52</b> beyit</span><span><b id="stat-poets">—</b> şair</span></div>
       <button class="btn btn-light" type="button" id="listen-play"><span class="play-dot" aria-hidden="true"></span>Sırayla dinlemeye başla</button>
     </div>
@@ -126,21 +122,21 @@
   </section>
 
   <section class="teacher-sec" id="hocamiz" aria-labelledby="teacher-title">
-    <figure class="book-figure"><img src="kapak.webp" width="600" height="839" alt="Bir Beyit, Bir Âlem kitabının kapağı; Hayâtî İnanç Hocamızın fotoğrafıyla" loading="lazy"></figure>
+    <figure class="book-figure"><img src="kapak.webp?v=20261125" width="600" height="854" alt="Şair Ne Demek İstedi? kitabının kapağı: güller ve sarmaşıktan bir soru işareti, altında mürekkep hokkası" loading="lazy"></figure>
     <div class="teacher-text">
       <p class="eyebrow">Kitabın sahibi</p>
-      <h2 id="teacher-title">Hayâtî İnanç</h2>
-      <p>Edebiyat öğretmeni, yazar ve gönül adamı Hayâtî İnanç Hocamız, yıllardır divan şiirinin inceliklerini sohbetleriyle gönüllere taşıyor. “Can Veren Pervaneler” ve “Söz Arasında” gibi programlarında okuduğu beyitler, bu kitabın da mayası oldu.</p>
-      <p><i>Bir Beyit, Bir Âlem</i>, Hocamızın şerhleriyle elli iki beyti, her birine eşlik eden bir tabloyla bir araya getiriyor: Nâbî’den Fuzûlî’ye, Şeyh Gâlib’den Yunus Emre’ye, iki mısraya sığmış koca âlemler.</p>
-      <ul class="book-facts"><li><b>52</b> beyit</li><li><b>52</b> tablo</li><li><b>106</b> sayfa</li></ul>
+      <h2 id="teacher-title">Hayati İnanç</h2>
+      <p>Hayati İnanç Hocamız yıllardır divan şiirinin inceliklerini sohbetleriyle gönüllere taşıyor. “Can Veren Pervaneler” ve “Söz Arasında” gibi programlarında okuduğu beyitler, bu kitabın da mayası oldu.</p>
+      <p><i>Şair Ne Demek İstedi?</i>, Hocamızın izahlarıyla elli iki beyti, her birine eşlik eden bir tabloyla bir araya getiriyor: Nâbî’den Fuzûlî’ye, Şeyh Gâlib’den Yunus Emre’ye, iki mısraya sığmış koca âlemler.</p>
+      <ul class="book-facts"><li><b>52</b> beyit</li><li><b>52</b> tablo</li><li><b>112</b> sayfa</li></ul>
       <a class="text-link" href="https://hayatiinanc.com/" rel="noopener">Hocamızın sitesi: hayatiinanc.com ↗</a>
     </div>
   </section>
 </main>
 
 <footer class="foot">
-  <p class="foot-title">Bir Beyit, <em>Bir Âlem</em></p>
-  <p>Hayâtî İnanç</p>
+  <p class="foot-title">Şair Ne Demek <em>İstedi?</em></p>
+  <p>Hayati İnanç</p>
   <nav class="foot-links" aria-label="Bağlantılar"><a href="https://hayatiinanc.com/" rel="noopener">hayatiinanc.com</a><a href="https://raufenc.com/aruz/">Fâilâtün · aruz</a><a href="https://raufenc.com/">raufenc.com</a></nav>
   <p class="small">Tablolar ve metinler kitaba aittir; izinsiz çoğaltılamaz. Okuyuş kayıtları sahiplerinin YouTube kanallarından, bulundukları yerde açılır.</p>
 </footer>
