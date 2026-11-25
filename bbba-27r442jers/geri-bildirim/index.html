@@ -122,11 +122,12 @@ textarea:focus{outline:none;border-color:var(--yesil)}
 <script>
 /* ================== kitap ================== */
 const ORAN = 165 / 235;
-const P = n => `s/${String(n).padStart(3, '0')}.webp`;
-const ACILIM = [[null, {src: 's/on.webp', ad: 'Ön kapak', k: 'on', kapak: 1}], [{bos: 1, ad: 'İç kapak'}, {src: P(1), ad: 's. 1', k: '1'}]];
+const SURUM = '20261125b';   // sayfa resimleri değişince artır (tarayıcı önbelleği)
+const P = n => `s/${String(n).padStart(3, '0')}.webp?v=${SURUM}`;
+const ACILIM = [[null, {src: 's/on.webp?v=' + SURUM, ad: 'Ön kapak', k: 'on', kapak: 1}], [{bos: 1, ad: 'İç kapak'}, {src: P(1), ad: 's. 1', k: '1'}]];
 for (let n = 2; n <= 110; n += 2) ACILIM.push([{src: P(n), ad: 's. ' + n, k: String(n)}, {src: P(n + 1), ad: 's. ' + (n + 1), k: String(n + 1)}]);
 ACILIM.push([{src: P(112), ad: 's. 112', k: '112'}, {bos: 1, ad: 'İç kapak'}]);
-ACILIM.push([{src: 's/arka.webp', ad: 'Arka kapak', k: 'arka', kapak: 1}, null]);
+ACILIM.push([{src: 's/arka.webp?v=' + SURUM, ad: 'Arka kapak', k: 'arka', kapak: 1}, null]);
 const BOLUM = n => n === 1 ? 'Başlık' : n === 2 ? 'Künye' : n === 3 ? 'Mukaddime' : n >= 4 && n <= 107 ? 'Beyit ' + Math.floor((n - 2) / 2) : n === 108 ? 'Dinleme rehberi' : n === 109 ? 'Hayati İnanç' : n <= 111 ? 'Fihrist' : 'Yeni Kök kitaplığı';
 const sayfaAdi = k => k === 'on' ? 'Ön kapak' : k === 'arka' ? 'Arka kapak' : k === 'genel' ? 'Genel' : `s. ${k} · ${BOLUM(+k)}`;
 const acilimAdi = i => { const [a, b] = ACILIM[i]; const k = [a, b].filter(x => x && x.k).map(x => x.k);
