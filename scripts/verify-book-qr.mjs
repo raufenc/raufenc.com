@@ -80,6 +80,8 @@ export function verifyBirBeyitPage(root = new URL('..', import.meta.url)) {
     '52beyit: beyitler.json kitaptaki 52 beytin hepsini 1–52 sırasıyla taşımalı.');
   const vercel = JSON.parse(read('vercel.json'));
   const yon = (vercel.redirects || []).find(r => r.source === '/bir-beyit-bir-alem/:yol*');
+  const kok = (vercel.redirects || []).find(r => r.source === '/bir-beyit-bir-alem/');
+  assert.ok(kok && kok.destination === '/52beyit/', 'Basılı karekodun kendisi /bir-beyit-bir-alem/ → /52beyit/ yönlenmeli (:yol* boş yolu yakalamıyor).');
   assert.ok(yon && yon.destination === '/52beyit/:yol*', 'Eski basılı adres /bir-beyit-bir-alem/ → /52beyit/ yönlendirmesi vercel.json\'da olmalı.');
   assert.ok(read('aruz/index.html').includes('failatun.js'), 'Kitabın iç karekodu /aruz/ sayfasına gider; sayfa yerinde olmalı.');
 }
