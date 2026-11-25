@@ -209,7 +209,6 @@ details li{margin-bottom:4px;font-size:13.5px}
 .ozel .dugmeler{margin-top:10px}
 .baglar{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;margin-top:12px}
 .dip b{display:block;color:var(--ink);font-size:15px}
-.dip-kunye{display:block;margin-top:8px;font-size:12.5px}.dip-kunye a{color:inherit;text-decoration:underline}
 /* canlılık */
 @keyframes yuksel{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes belir{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
@@ -483,7 +482,7 @@ function giris(odak){
   $('#silbag').onclick = () => { sil(); giris(true); };
   $('#ornek').onclick = () => { ORN = ornekVeri(); sonuc(); };
 }
-function dip(){ return `<p class="dip"><b>${kac(B.alt1)}</b>${kac(B.alt2)}<span class="dip-kunye">Rauf Enç tarafından TACEV için geliştirildi · <a href="/">raufenc.com</a></span></p>`; }
+function dip(){ return `<p class="dip"><b>${kac(B.alt1)}</b>${kac(B.alt2)}</p>`; }
 function yontemAc(){ const d = $('#yontem'); if (!d) return; d.open = true; d.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'start'}); const o = d.querySelector('summary'); if (o) o.focus({preventScroll:true}); }
 function ornekVeri(){
   const tercih = ['PLN','YOK','TOP','ANL','BAK','ONR'], sira = [0,0,1,0,2,0,1,0,0,1];
