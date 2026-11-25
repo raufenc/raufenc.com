@@ -14,11 +14,12 @@ html,body{height:100%;margin:0}
 body{background:var(--zemin);color:var(--yazi);font-family:"Source Sans 3",system-ui,sans-serif;display:flex;overflow:hidden}
 button{font:inherit;cursor:pointer}
 /* ---------- kitap alanı ---------- */
-#sahne{flex:1;min-width:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at 30% 40%,#3d3a34,#262521 70%)}
-#ust{display:flex;align-items:center;gap:12px;padding:10px 16px;color:#e9e2d2;font-size:14px}
+#sahne{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;background:radial-gradient(ellipse at 30% 40%,#3d3a34,#262521 70%)}
+#ust{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;gap:12px;padding:8px 14px;color:#e9e2d2;font-size:13px;background:linear-gradient(rgba(20,19,17,.75),transparent);opacity:0;transition:opacity .25s;pointer-events:none}
+#sahne:hover #ust,#sahne:hover #alt{opacity:1;pointer-events:auto}
 #ust b{font-family:"EB Garamond",serif;font-weight:500;font-size:19px;color:#fff}
 #ust .yer{margin-left:auto;opacity:.8}
-#kitapAlan{flex:1;min-height:0;display:flex;align-items:center;justify-content:flex-start;padding:8px 16px;position:relative}
+#kitapAlan{flex:1;min-height:0;display:flex;align-items:center;justify-content:flex-start;padding:6px;position:relative}
 #kitap{position:relative;display:flex;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45));transition:opacity .18s}
 #kitap.gecis{opacity:.15}
 .sayfa{position:relative;background:#fbf7ee;overflow:hidden}
@@ -34,14 +35,16 @@ button{font:inherit;cursor:pointer}
 .pin.benim{background:var(--yesil2)}
 .pin.secili{outline:3px solid #ffd54a}
 .sayfa.isaretle{cursor:crosshair}
-.ok{flex:0 0 auto;width:44px;height:64px;margin:0 8px;border:0;border-radius:10px;background:rgba(255,255,255,.08);color:#fff;font-size:26px;z-index:5}
-.ok:hover{background:rgba(255,255,255,.18)}
+.ok{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:72px;border:0;border-radius:10px;background:rgba(20,19,17,.45);color:#fff;font-size:28px;z-index:5;opacity:0;transition:opacity .2s}
+#sahne:hover .ok{opacity:1}
+.ok:hover{background:rgba(20,19,17,.75)}
+#geri{left:10px}
 .ok:disabled{opacity:.2;cursor:default}
-#alt{display:flex;align-items:center;gap:12px;padding:10px 20px 14px;color:#cfc6b2;font-size:13px}
+#alt{position:absolute;bottom:0;left:0;right:0;z-index:6;display:flex;align-items:center;gap:12px;padding:10px 16px;color:#cfc6b2;font-size:13px;background:linear-gradient(transparent,rgba(20,19,17,.8));opacity:0;transition:opacity .25s;pointer-events:none}
 #alt input[type=range]{flex:1;accent-color:#c9a35a}
 #alt select{background:#3d3a34;color:#fff;border:1px solid #57524a;border-radius:8px;padding:6px 8px;max-width:220px}
 /* ---------- not bölmesi ---------- */
-#panel{width:400px;flex:0 0 400px;background:var(--krem);display:flex;flex-direction:column;border-left:1px solid #000;min-height:0}
+#panel{width:340px;flex:0 0 340px;background:var(--krem);display:flex;flex-direction:column;border-left:1px solid #000;min-height:0}
 #panel header{padding:16px 18px 10px;border-bottom:1px solid var(--cizgi);background:#fbf6ea}
 #panel h2{font-family:"EB Garamond",serif;font-weight:500;font-size:24px;margin:0;color:var(--yesil)}
 #panel .alt{font-size:13px;color:var(--soluk);margin-top:2px}
@@ -84,7 +87,8 @@ textarea:focus{outline:none;border-color:var(--yesil)}
 /* ---------- telefon ---------- */
 @media (max-width:900px){
   body{flex-direction:column;overflow:auto;height:auto}
-  #sahne{min-height:72vh}
+  #sahne{flex:none;height:86vh;min-height:0}
+  #ust,#alt,.ok{opacity:1;pointer-events:auto}
   #kitapAlan{justify-content:center;padding:8px 8px}
   #panel{width:auto;flex:none;border-left:0;border-top:1px solid #000}
   #govde{overflow:visible}
@@ -133,10 +137,11 @@ let ai = 0;
 try { const h = +(location.hash.match(/a(\d+)/) || [])[1]; if (h >= 0 && h < ACILIM.length) ai = h; } catch (e) {}
 function boyut(){
   const r = alanEl.getBoundingClientRect(); const tek = innerWidth <= 900;
-  const yH = r.height - 44, yW = (r.width - 150) / (tek ? 1 : 2);
+  const yH = r.height - 12, yW = (r.width - 12) / (tek ? 1 : 2);
   const h = Math.max(200, Math.min(yH, yW / ORAN)); return {h, w: h * ORAN, tek};
 }
 let tekGoster = 0; // telefonda açılımın hangi yüzü
+function okYeri(){ const kr = kitapEl.getBoundingClientRect(), sr = document.getElementById('sahne').getBoundingClientRect(); const ok = document.getElementById('ileri'); ok.style.left = Math.min(kr.right - sr.left - 50, sr.width - 50) + 'px'; }
 function ciz(anim){
   const {h, w, tek} = boyut();
   const yuz = ACILIM[ai];
@@ -153,7 +158,7 @@ function ciz(anim){
     if (s.k) d.addEventListener('click', ev => sayfaTik(ev, d, s.k));
     kitapEl.appendChild(d);
   });
-  pinleriCiz();
+  pinleriCiz(); requestAnimationFrame(okYeri);
   document.getElementById('yerYazi').textContent = acilimAdi(ai);
   document.getElementById('sayac').textContent = `${ai + 1} / ${ACILIM.length}`;
   document.getElementById('kaydir').value = ai; document.getElementById('git').value = ai;
