@@ -47,3 +47,11 @@ SDK client bundle kaynak paketi `@vercel/blob` 2.8.2, esbuild 0.28.2. Vendor lis
 ## 20 Ekim 2026 kurulum durumu
 
 Vercel connector proje okuma ve GitHub yazma erişimi doğrulandı. Vercel Blob oluşturma ve ortam değişkeni listeleme işlemleri 403 döndü; yerel Vercel CLI girişi mevcut değil. Depo bağlantısı tamamlanmadan gerçek kalıcı upload ve oturum açma uçtan uca doğrulanmış kabul edilmez. Kullanıcıya Vercel paneline giriş isteği gönderildi. Ana sayfa dosyası değiştirilmedi.
+
+## Büyük medya GitHub Pages'te (26 Kasım 2026)
+
+Vercel depolama kotası dolduğu için videolu V2 sunumlarının `media/` klasörleri ve "Bu Salonda 28 Girişim Var"ın PPTX + iki filmi
+ayrı GitHub Pages depolarına taşındı: `raufenc/sunum-medya-<sunum-id>` → `https://raufenc.github.io/sunum-medya-<sunum-id>/<dosya>`.
+`project.json`, `index.html`, `v2-projects.js`, `room.js` ve `web/deste.js` bu adresleri kullanır; eski `/sunumlar/<id>/media/...`
+adresleri `vercel.json` içinde oraya yönlendirilir. Yeni videolu sunum eklerken büyük dosyaları bu depoya koymayın; aynı yolla
+yeni bir `sunum-medya-*` deposu açın (tek dosya 100 MB'ı, depo 1 GB'ı geçmesin).

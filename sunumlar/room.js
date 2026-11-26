@@ -10,7 +10,7 @@ const legacy = [
 legacy.unshift({
   id: "para-dedigin-sey", title: "Para Dediğin Şey",
   description: "Paranın doğası, değeri ve hayatımızdaki yeri üzerine videolu sunum.",
-  cover: "/sunumlar/para-dedigin-sey/media/slide-01.jpg",
+  cover: "https://raufenc.github.io/sunum-medya-para-dedigin-sey/slide-01.jpg",
   label: "VİDEOLU SUNUM", meta: "55 slayt · 19 video",
   url: "/sunumlar/para-dedigin-sey/",
   manifestURL: "/sunumlar/para-dedigin-sey/project.json",

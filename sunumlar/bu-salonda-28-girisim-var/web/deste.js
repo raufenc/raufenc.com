@@ -66,7 +66,7 @@ Sabahtan beri on üç ders dinlediniz. Üzülmeyin: onlar bu kursun ücretsiz ta
       ${karikatur("K16_milyoner", "", "SÖZ: UYGULARSANIZ", "Bu haftanın notları, <em>uygulanırsa</em> böyle büyür. Uygulanmazsa… yarın anlatırım.", 5, 6, 420, 100, -2)}
       <div class="ab adim" data-a="6" style="left:0;top:0;width:1px;height:1px"></div>` },
   // 2 ─ FİLM 1 · 28
-  { tur: "film", bolum: 0, sure: 31, video: "video/F1.mp4", poster: "video/F1.jpg", olcut: ["Etkileyici giriş (HİŞT): Heyecan", "Görsel ve işitsel araçlar"],
+  { tur: "film", bolum: 0, sure: 31, video: "https://raufenc.github.io/sunum-medya-bu-salonda-28-girisim-var/video/F1.mp4", poster: "video/F1.jpg", olcut: ["Etkileyici giriş (HİŞT): Heyecan", "Görsel ve işitsel araçlar"],
     not: `[Film kendiliğinden başlar (~31 sn, Emmett anlatıyor). Sen salona dön; kendi konularını duyunca gülümseyecekler. Film bitince TIKLA.]` },
 
   // 3 ─ 28 GİRİŞİM + EL KALDIRMA
@@ -201,7 +201,7 @@ Ama değerin görünmeyen bir yüzü var. Sekiz yüz yıl önce, bir Ahi çarş�
       <div class="ab adim" data-a="2" style="left:0;right:0;top:360px;text-align:center"><div class="baslik" style="font-size:120px;color:var(--beyaz);line-height:1.02">Ama değerin bir de<br><span style="color:var(--saf)">görünmeyen yüzü</span> var…</div></div>` },
 
   // 11 ─ FİLM 2 · PABUCU DAMA ATILDI
-  { tur: "film", bolum: 3, sure: 38, video: "video/F2.mp4", poster: "video/F2.jpg", olcut: ["Görsel ve işitsel araçlar", "Motivasyon ve ilgi çekicilik"],
+  { tur: "film", bolum: 3, sure: 38, video: "https://raufenc.github.io/sunum-medya-bu-salonda-28-girisim-var/video/F2.mp4", poster: "video/F2.jpg", olcut: ["Görsel ve işitsel araçlar", "Motivasyon ve ilgi çekicilik"],
     not: `[Film kendiliğinden başlar (~38 sn, Emmett anlatıyor). Taban kopunca ve pabuç dama düşünce salon güler — bekle. Film bitince TIKLA.]` },
 
   // 12 ─ GÜVEN
