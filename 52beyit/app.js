@@ -15,7 +15,7 @@
   const tm = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
   const byNo = (n) => POEMS.find((p) => p.number === n);
   const hasRec = (p) => !!(p && p.recording && p.recording.video_id);
-  const img = (n, small) => `tablo/${String(n).padStart(2, "0")}${small ? "-k" : ""}.webp?v=20261126`;   // 26 Kas: 6 tablo düzeltildi
+  const img = (n, small) => `tablo/${String(n).padStart(2, "0")}${small ? "-k" : ""}.webp?v=20261126b`;   // 26 Kas: 6 tablo + 2. tur (yayınevi notları, kilise/haç, el, taç) düzeltildi
   function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("on"), 2400); }
 
   function meterChips(meter, small) {
