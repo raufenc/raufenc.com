@@ -383,14 +383,6 @@
     }
   ],
   "redirects": [
-    {"source": "/sunumlar/benim-ve-ashabimin-yolu-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-benim-ve-ashabimin-yolu-v2/:path", "permanent": false},
-    {"source": "/sunumlar/para-dedigin-sey/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-para-dedigin-sey/:path", "permanent": false},
-    {"source": "/sunumlar/yapay-zekayla-niye-anlasamiyoruz-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-yapay-zekayla-niye-anlasamiyoruz-v2/:path", "permanent": false},
-    {"source": "/sunumlar/el-emin-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-el-emin-v2/:path", "permanent": false},
-    {"source": "/sunumlar/allah-hakkinda-suphe-mi-var-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-allah-hakkinda-suphe-mi-var-v2/:path", "permanent": false},
-    {"source": "/sunumlar/sen-konusmadan-once-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-sen-konusmadan-once-v2/:path", "permanent": false},
-    {"source": "/sunumlar/bu-salonda-28-girisim-var/Bu_Salonda_28_Girisim_Var_Birlesik.pptx", "destination": "https://raufenc.github.io/sunum-medya-bu-salonda-28-girisim-var/Bu_Salonda_28_Girisim_Var_Birlesik.pptx", "permanent": false},
-    {"source": "/sunumlar/bu-salonda-28-girisim-var/web/video/:f(.*\\.mp4)", "destination": "https://raufenc.github.io/sunum-medya-bu-salonda-28-girisim-var/video/:f", "permanent": false},
     {
       "source": "/neuroterbiye-adalet",
       "destination": "https://www.youtube.com/watch?v=mZLrfNy2Ia8",
@@ -711,7 +703,15 @@
       "source": "/iyilikakademi/:path((?!sw\\.js$).*)",
       "destination": "/",
       "permanent": false
-    }
+    },
+    {"source": "/sunumlar/benim-ve-ashabimin-yolu-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-benim-ve-ashabimin-yolu-v2/:path", "permanent": false},
+    {"source": "/sunumlar/para-dedigin-sey/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-para-dedigin-sey/:path", "permanent": false},
+    {"source": "/sunumlar/yapay-zekayla-niye-anlasamiyoruz-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-yapay-zekayla-niye-anlasamiyoruz-v2/:path", "permanent": false},
+    {"source": "/sunumlar/el-emin-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-el-emin-v2/:path", "permanent": false},
+    {"source": "/sunumlar/allah-hakkinda-suphe-mi-var-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-allah-hakkinda-suphe-mi-var-v2/:path", "permanent": false},
+    {"source": "/sunumlar/sen-konusmadan-once-v2/media/:path(.*)", "destination": "https://raufenc.github.io/sunum-medya-sen-konusmadan-once-v2/:path", "permanent": false},
+    {"source": "/sunumlar/bu-salonda-28-girisim-var/Bu_Salonda_28_Girisim_Var_Birlesik.pptx", "destination": "https://raufenc.github.io/sunum-medya-bu-salonda-28-girisim-var/Bu_Salonda_28_Girisim_Var_Birlesik.pptx", "permanent": false},
+    {"source": "/sunumlar/bu-salonda-28-girisim-var/web/video/:f(.*\\.mp4)", "destination": "https://raufenc.github.io/sunum-medya-bu-salonda-28-girisim-var/video/:f", "permanent": false}
   ],
   "rewrites": [
     {
