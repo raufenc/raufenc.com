@@ -122,7 +122,7 @@ textarea:focus{outline:none;border-color:var(--yesil)}
 <script>
 /* ================== kitap ================== */
 const ORAN = 165 / 235;
-const SURUM = '20261126c';   // sayfa resimleri değişince artır (tarayıcı önbelleği)
+const SURUM = '20261127a';   // sayfa resimleri değişince artır (tarayıcı önbelleği)
 const P = n => `s/${String(n).padStart(3, '0')}.webp?v=${SURUM}`;
 const ACILIM = [[null, {src: 's/on.webp?v=' + SURUM, ad: 'Ön kapak', k: 'on', kapak: 1}], [{bos: 1, ad: 'İç kapak'}, {src: P(1), ad: 's. 1', k: '1'}]];
 for (let n = 2; n <= 110; n += 2) ACILIM.push([{src: P(n), ad: 's. ' + n, k: String(n)}, {src: P(n + 1), ad: 's. ' + (n + 1), k: String(n + 1)}]);
